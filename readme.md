@@ -1,2 +1,2 @@
-This dotfiles is used by longfin(longfinfunnel@gmail.com)
+These dotfiles are used by longfin(longfinfunnel@gmail.com)
 
