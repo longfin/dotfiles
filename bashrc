@@ -29,3 +29,7 @@ PATH=$PATH:~/.cabal/bin
 export PATH
 
 source /etc/profile
+
+JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF8 -Dswank.encoding=UTF8'
+export JAVA_TOOL_OPTIONS
+

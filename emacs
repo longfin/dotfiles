@@ -1,4 +1,4 @@
-(set-language-environment "Korean")
+(set-language-environment "UTF-8")
 (setq load-path (cons (expand-file-name "~/.emacs.d/") load-path))
 
 (set-terminal-coding-system 'utf-8)
@@ -115,6 +115,7 @@
 (slime-setup '(slime-repl))
 
 (setq inhibit-splash-screen t)
+(setq slime-net-coding-system 'utf-8-unix)
 
 
 ;; Setup PATH 
@@ -122,6 +123,9 @@
 ;; Update exec-path with the contents of $PATH
 (loop for path in (split-string (getenv "PATH") ":") do 
       (add-to-list 'exec-path path))
+
+;; Setup JAVA_TOOL_OPTIONS
+(setenv "JAVA_TOOL_OPTIONS" (shell-command-to-string "source ~/.bashrc; echo -n $JAVA_TOOL_OPTIONS"))
 
 ;; Grab other environment variables
 (loop for var in (split-string (shell-command-to-string "source ~/.bashrc; 
