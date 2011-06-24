@@ -110,7 +110,7 @@
 (setq ring-bell-function 'ignore)
 
 (add-to-list 'load-path "~/.emacs.d/slime-20101113.1")  ; your SLIME directory
-;;(setq inferior-lisp-program "/opt/sbcl/bin/sbcl") ; your Lisp system
+(setq inferior-lisp-program "/usr/local/bin/sbcl") ; your Lisp system
 (require 'slime)
 (slime-setup '(slime-repl))
 
