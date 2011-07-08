@@ -135,3 +135,5 @@ env")) do
              (value (cadr pair)))
         (unless (getenv key)
           (setenv key value))))
+
+(setq make-backup-files nil)

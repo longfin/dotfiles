@@ -15,4 +15,5 @@
   ("perl" "\\perl")
   ("id" "/usr/bin/id")
   ("gid-integer" 0)
-  ...))
+  ("uid-integer" 0)
+  ("readlink" nil)))

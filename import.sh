@@ -1,7 +1,9 @@
 #!/bin/sh
 
-cp -rf ~/.bash_profile bash_profile
-cp -rf ~/.bashrc bashrc
-cp -rf ~/.emacs emacs
-cp -rf ~/.emacs.d/* emacs.d/
+cp -RHf ~/.bash_profile .bash_profile
+cp -RHf ~/.bashrc .bashrc
+cp -RHf ~/.emacs .emacs
+
+mkdir .emacs.d
+cp -RHf ~/.emacs.d/* .emacs.d/
 
