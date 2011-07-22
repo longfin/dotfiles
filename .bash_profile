@@ -33,3 +33,5 @@ source /etc/profile
 JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF8 -Dswank.encoding=UTF8'
 export JAVA_TOOL_OPTIONS
 
+PATH=$PATH:/Users/longfin/dev/Racket-5.1.1/bin
+export PATH
