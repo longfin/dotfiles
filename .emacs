@@ -109,10 +109,10 @@
 
 (setq ring-bell-function 'ignore)
 
-(add-to-list 'load-path "~/.emacs.d/slime-20101113.1")  ; your SLIME directory
+(add-to-list 'load-path "~/.emacs.d/slime-2011-08-03")  ; your SLIME directory
 (setq inferior-lisp-program "/usr/local/bin/sbcl") ; your Lisp system
 (require 'slime)
-(slime-setup '(slime-repl))
+(slime-setup '(slime-repl slime-js))
 
 (setq inhibit-splash-screen t)
 (setq slime-net-coding-system 'utf-8-unix)
@@ -149,3 +149,17 @@ env")) do
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  )
+
+
+;; moz-repl
+(autoload 'moz-minor-mode "moz" "Mozilla Minor and Inferior Mozilla Modes" t)
+
+(add-hook 'js2-mode-hook 'js2-custom-setup)
+(defun js2-custom-setup ()
+  (moz-minor-mode 1))
+
+;; swank-js
+(global-set-key [f5] 'slime-js-reload)
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (slime-js-minor-mode 1)))

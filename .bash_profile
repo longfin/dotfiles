@@ -35,3 +35,7 @@ export JAVA_TOOL_OPTIONS
 
 PATH=$PATH:/Users/longfin/dev/Racket-5.1.1/bin
 export PATH
+
+
+MITSCHEME_LIBRARY_PATH=/Applications/mit-scheme.app/Contents/Resources
+export MITSCHEME_LIBRARY_PATH
