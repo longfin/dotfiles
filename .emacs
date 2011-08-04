@@ -163,3 +163,8 @@ env")) do
 (add-hook 'js2-mode-hook
           (lambda ()
             (slime-js-minor-mode 1)))
+
+
+;; tumble setting
+
+(require 'tumble)
