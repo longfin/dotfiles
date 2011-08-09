@@ -85,9 +85,9 @@
 ;; Optional:
 ;;
 ;; Open tumble.el (this file) and modify the following variables:
-;; (setq tumble-email "your_email@something.com")
-;; (setq tumble-password "your_password")
-;; (setq tumble-url "your_tumblelog.tumblr.com")
+(setq tumble-email "longfinfunnel@gmail.com")
+(setq tumble-password nil)
+(setq tumble-url "http://www.tumblr.com/tumblelog/longfin")
 ;;
 ;; Tumble uses no group for posting and Markdown as the default
 ;; format but you can change these:
@@ -105,9 +105,9 @@
 (require 'http-post-simple)
 
 ;; Personal information
-(setq tumble-email nil)
-(setq tumble-password nil)
-(setq tumble-url nil)
+;;(setq tumble-email nil)
+;;(setq tumble-password nil)
+;;(setq tumble-url nil)
 
 ;; Optional information
 (setq tumble-group nil)                      ; uncomment to use a group.
