@@ -39,3 +39,6 @@ export PATH
 
 MITSCHEME_LIBRARY_PATH=/Applications/mit-scheme.app/Contents/Resources
 export MITSCHEME_LIBRARY_PATH
+
+PATH=$PATH:/Users/longfin/dev/play-1.2.3
+export PATH

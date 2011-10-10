@@ -18,10 +18,10 @@
 
 (add-hook 'nxml-mode-hook 
           '(lambda()
-             (setq c-basic-offset 4)
-             (setq tab-width 4)
-             (setq indent-tabs-mode t)
-             (setq nxml-child-indent 4)
+             (setq c-basic-offset 2)
+             (setq tab-width 2)
+             (setq indent-tabs-mode nil)
+             (setq nxml-child-indent 2)
              (setq nxml-slash-auto-complete-flag t)
              (message "customize nxml-mode")))
 
@@ -168,3 +168,95 @@ env")) do
 ;; tumble setting
 
 (require 'tumble)
+
+;; python mode tweek
+
+(add-hook 'python-mode-hook '(lambda()
+							   (local-set-key (kbd "RET") 'newline-and-indent)))
+
+
+;; add port option to sql-mysql
+(defadvice sql-mysql (around with-port activate)
+  (let* ((port (read-string "Port: "))
+		 (sql-mysql-options 
+		  (if (not (string= "" port))
+			  (append sql-mysql-options (list (concat "--port=" port)))
+			sql-mysql-options)))
+	ad-do-it))
+
+
+;; jinja2 mode
+(load "~/.emacs.d/jinja2.el")
+
+
+;; tag navigation shortcut
+
+(fset 'find-next-tag "\C-u\256")        ; macro for C-u M-.
+(fset 'find-prev-tag "\C-u-\256")       ; macro for C-u - M-.
+(global-set-key "\M-]" 'find-next-tag)
+(global-set-key "\M-[" 'find-prev-tag)
+(global-set-key "\M-\," 'pop-tag-mark)
+
+
+(defun delete-this-buffer-and-file ()
+  "Removes file connected to current buffer and kills buffer."
+  (interactive)
+  (let ((filename (buffer-file-name))
+        (buffer (current-buffer))
+        (name (buffer-name)))
+    (if (not (and filename (file-exists-p filename)))
+        (error "Buffer '%s' is not visiting a file!" name)
+      (when (yes-or-no-p "Are you sure you want to remove this file? ")
+        (delete-file filename)
+        (kill-buffer buffer)
+        (message "File '%s' successfully removed" filename)))))
+
+(global-set-key (kbd "C-c k") 'delete-this-buffer-and-file)
+
+(set-input-method "korean-hangul")
+
+
+(add-hook 'javascript-mode-hook 
+          '(lambda()
+             (setq c-basic-offset 2)
+             (setq tab-width 2)
+             (setq indent-tabs-mode nil)
+             (setq nxml-child-indent 2)
+             (setq nxml-slash-auto-complete-flag t)))
+
+(add-hook 'java-mode-hook
+		  (lambda ()
+			"Treat Java 1.5 @-style annotations as comments."
+			(setq c-comment-start-regexp "(@|/(/|[*][*]?))")
+			(modify-syntax-entry ?@ "< b" java-mode-syntax-table)))
+
+(add-hook 'java-mode-hook
+		  (lambda ()
+			(setq c-basic-offset 4
+				  tab-width 4
+				  indent-tabs-mode nil)))
+
+
+(defvar real-keyboard-keys
+  '(("M-<up>"        . "\M-[1;3A")
+    ("M-<down>"      . "\M-[1;3B")
+    ("M-<right>"     . "\M-[1;3C")
+    ("M-<left>"      . "\M-[1;3D")
+    ("C-<return>"    . "\C-j")
+    ("C-<delete>"    . "\M-[3;5~")
+    ("C-<up>"        . "\M-[1;5A")
+    ("C-<down>"      . "\M-[1;5B")
+    ("C-<right>"     . "\M-[1;5C")
+    ("C-<left>"      . "\M-[1;5D"))
+  "An assoc list of pretty key strings
+and their terminal equivalents.")
+
+(defun key (desc)
+  (or (and window-system (read-kbd-macro desc))
+      (or (cdr (assoc desc real-keyboard-keys))
+          (read-kbd-macro desc))))
+
+(global-set-key (key "M-<left>") 'windmove-left)          ; move to left windnow
+(global-set-key (key "M-<right>") 'windmove-right)        ; move to right window
+(global-set-key (key "M-<up>") 'windmove-up)              ; move to upper window
+(global-set-key (key "M-<down>") 'windmove-down)          ; move to downer window
