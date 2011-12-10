@@ -75,15 +75,6 @@
 (iswitchb-mode t)
 
 
-(autoload 'markdown-mode "markdown-mode.el"
-  "Major mode for editing Markdown files" t)
-(setq auto-mode-alist
-      (cons '("\\.text" . markdown-mode) auto-mode-alist))
-(setq auto-mode-alist
-      (cons '("\\.md" . markdown-mode) auto-mode-alist))
-(setq auto-mode-alist
-      (cons '("\\.markdown" . markdown-mode) auto-mode-alist))
-
 (add-hook 'scheme-mode-hook '(lambda ()
       (local-set-key (kbd "RET") 'newline-and-indent)))
 
@@ -142,7 +133,7 @@ env")) do
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(markdown-command "~/dev/Markdown_1.0.1/Markdown.pl"))
+ '(markdown-command "maruku"))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
@@ -260,3 +251,7 @@ and their terminal equivalents.")
 (global-set-key (key "M-<right>") 'windmove-right)        ; move to right window
 (global-set-key (key "M-<up>") 'windmove-up)              ; move to upper window
 (global-set-key (key "M-<down>") 'windmove-down)          ; move to downer window
+
+(global-auto-revert-mode t)
+
+(setq virtualenv-root ".")
