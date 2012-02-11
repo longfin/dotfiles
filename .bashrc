@@ -1,3 +1,5 @@
+source /etc/profile
+
 PATH=$PATH:/Users/longfin/dev/groovy-1.6.4/bin/
 export PATH
 
@@ -28,8 +30,6 @@ export PATH
 PATH=$PATH:~/.cabal/bin
 export PATH
 
-source /etc/profile
-
 JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF8 -Dswank.encoding=UTF8'
 export JAVA_TOOL_OPTIONS
 
@@ -42,3 +42,7 @@ export MITSCHEME_LIBRARY_PATH
 
 PATH=$PATH:/Users/longfin/dev/play-1.2.3
 export PATH
+
+PATH=$PATH:/Users/longfin/dev/homebrew/bin
+export PATH
+

@@ -25,8 +25,8 @@
              (setq nxml-slash-auto-complete-flag t)
              (message "customize nxml-mode")))
 
-(add-to-list 'auto-mode-alist '("\\.htm\\'" . nxhtml-mode))
-(add-to-list 'auto-mode-alist '("\\.html\\'" . nxhtml-mode))
+(add-to-list 'auto-mode-alist '("\\.htm\\'" . nxhtml-mumamo-mode))
+(add-to-list 'auto-mode-alist '("\\.html\\'" . nxhtml-mumamo-mode))
 
 (when (locate-library "erc")
   (require 'erc)
@@ -101,7 +101,7 @@
 (setq ring-bell-function 'ignore)
 
 (add-to-list 'load-path "~/.emacs.d/slime-2011-08-03")  ; your SLIME directory
-(setq inferior-lisp-program "/usr/local/bin/sbcl") ; your Lisp system
+(setq inferior-lisp-program "sbcl") ; your Lisp system
 (require 'slime)
 (slime-setup '(slime-repl slime-js))
 
@@ -133,13 +133,17 @@ env")) do
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(markdown-command "maruku"))
+ '(markdown-command "pandoc"))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- )
+ '(mumamo-background-chunk-major ((t nil)))
+ '(mumamo-background-chunk-submode1 ((((class color) (min-colors 88) (background light)) nil)))
+ '(mumamo-background-chunk-submode2 ((((class color) (min-colors 88) (background light)) nil)))
+ '(mumamo-background-chunk-submode3 ((((class color) (min-colors 88) (background light)) nil)))
+ '(mumamo-background-chunk-submode4 ((((class color) (min-colors 88) (background light)) nil))))
 
 
 ;; moz-repl
@@ -175,11 +179,6 @@ env")) do
 			sql-mysql-options)))
 	ad-do-it))
 
-
-;; jinja2 mode
-(load "~/.emacs.d/jinja2.el")
-
-
 ;; tag navigation shortcut
 
 (fset 'find-next-tag "\C-u\256")        ; macro for C-u M-.
@@ -207,13 +206,13 @@ env")) do
 (set-input-method "korean-hangul")
 
 
-(add-hook 'javascript-mode-hook 
+(add-hook 'js-mode-hook 
           '(lambda()
              (setq c-basic-offset 2)
+			 (setq js-indent-level 2)
              (setq tab-width 2)
              (setq indent-tabs-mode nil)
-             (setq nxml-child-indent 2)
-             (setq nxml-slash-auto-complete-flag t)))
+			 (auto-complete-mode 1)))
 
 (add-hook 'java-mode-hook
 		  (lambda ()
@@ -255,3 +254,21 @@ and their terminal equivalents.")
 (global-auto-revert-mode t)
 
 (setq virtualenv-root ".")
+
+(setq
+ nxhtml-global-minor-mode t
+ nxhtml-skip-welcome t
+ indent-region-mode t
+ rng-nxml-auto-validate-flag nil
+ nxml-degraded t)
+
+;; jinja mode
+(load "~/.emacs.d/jinja.el")
+
+(add-hook 'css-mode-hook 
+          '(lambda()
+             (setq c-basic-offset 2)
+             (setq tab-width 2)
+			 (setq css-indent-offset 2)
+             (setq indent-tabs-mode nil)
+			 (auto-complete-mode 1)))
