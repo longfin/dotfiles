@@ -24,9 +24,6 @@ export LANG=ko_KR.UTF-8
 #PATH="/Library/Frameworks/Python.framework/Versions/3.0/bin:${PATH}"
 #export PATH
 
-PATH=$PATH:/Users/longfin/dev/leiningen/bin/
-export PATH
-
 PATH=$PATH:~/.cabal/bin
 export PATH
 
@@ -43,6 +40,17 @@ export MITSCHEME_LIBRARY_PATH
 PATH=$PATH:/Users/longfin/dev/play-1.2.3
 export PATH
 
-PATH=$PATH:/Users/longfin/dev/homebrew/bin
+PATH=$PATH:/Users/longfin/bin
 export PATH
 
+CLOJURESCRIPT_HOME=/Users/longfin/dev/clojurescript
+export CLOJURESCRIPT_HOME
+
+AWS_RDS_HOME=/Users/longfin/dev/RDSCli-1.6.001
+export AWS_RDS_HOME
+
+PATH=$PATH:$AWS_RDS_HOME/bin/
+export PATH
+
+JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
+export JAVA_HOME

@@ -100,11 +100,12 @@
 
 (setq ring-bell-function 'ignore)
 
-(add-to-list 'load-path "~/.emacs.d/slime-2011-08-03")  ; your SLIME directory
+(add-to-list 'load-path "~/.emacs.d/slime-2012-02-15")  ; your SLIME directory
+(load (expand-file-name "~/quicklisp/slime-helper.el"))
 (setq inferior-lisp-program "sbcl") ; your Lisp system
 (require 'slime)
-(slime-setup '(slime-repl slime-js))
-
+;(slime-setup '(slime-repl slime-js))
+(slime-setup '(slime-repl slime-asdf))
 (setq inhibit-splash-screen t)
 (setq slime-net-coding-system 'utf-8-unix)
 
@@ -208,9 +209,9 @@ env")) do
 
 (add-hook 'js-mode-hook 
           '(lambda()
-             (setq c-basic-offset 2)
-			 (setq js-indent-level 2)
-             (setq tab-width 2)
+             (setq c-basic-offset 4)
+			 (setq js-indent-level 4)
+             (setq tab-width 4)
              (setq indent-tabs-mode nil)
 			 (auto-complete-mode 1)))
 
@@ -272,3 +273,16 @@ and their terminal equivalents.")
 			 (setq css-indent-offset 2)
              (setq indent-tabs-mode nil)
 			 (auto-complete-mode 1)))
+
+(add-to-list 'auto-mode-alist '("\\.cljs\\'" . clojure-mode))
+
+(require 'uniquify)
+(setq uniqueify-buffer-name-style 'reverse)
+
+(add-hook 'markdown-mode-hook
+		  '(lambda ()
+			 (setq c-basic-offset 4)
+			 (setq tab-width 4)
+			 (setq indent-tabs-mode nil)))
+
+(add-to-list 'auto-mode-alist '("\\.md" . markdown-mode))
