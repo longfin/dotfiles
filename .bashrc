@@ -54,3 +54,6 @@ export PATH
 
 JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
 export JAVA_HOME
+
+PATH=/Library/PostgreSQL/8.3/bin/:$PATH
+

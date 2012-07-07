@@ -1,13 +1,11 @@
+(setq inhibit-splash-screen t)
 (set-language-environment "UTF-8")
 (setq load-path (cons (expand-file-name "~/.emacs.d/") load-path))
 
 (set-terminal-coding-system 'utf-8)
 (setq default-process-coding-system '(utf-8 . utf-8))
-;(set-keyboard-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
-;(set-selection-coding-system 'utf-8)
-;(set-buffer-file-coding-system 'utf-8) 
 (setq default-tab-width 4)
 
 (load "~/.emacs.d/hangul.el")
@@ -54,21 +52,6 @@
   (let ((inhibit-read-only t))
     (erase-buffer)))
 
-(defun lein-swank ()
-  (interactive)
-  (let ((root (locate-dominating-file default-directory "project.clj")))
-    (when (not root)
-      (error "Not in a Leiningen project."))
-    ;; you can customize slime-port using .dir-locals.el
-    (shell-command (format "cd %s && lein swank %s &" root 4005)
-                   "*lein-swank*")
-    (set-process-filter (get-buffer-process "*lein-swank*")
-                        (lambda (process output)
-                          (when (string-match "Connection opened on" output)
-                            (slime-connect "localhost" 4005)
-                            (set-process-filter process nil))))
-    (message "Starting swank server...")))
-
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 
@@ -100,14 +83,12 @@
 
 (setq ring-bell-function 'ignore)
 
-(add-to-list 'load-path "~/.emacs.d/slime-2012-02-15")  ; your SLIME directory
-(load (expand-file-name "~/quicklisp/slime-helper.el"))
-(setq inferior-lisp-program "sbcl") ; your Lisp system
-(require 'slime)
-;(slime-setup '(slime-repl slime-js))
-(slime-setup '(slime-repl slime-asdf))
-(setq inhibit-splash-screen t)
-(setq slime-net-coding-system 'utf-8-unix)
+;; (add-to-list 'load-path "~/.emacs.d/slime-2012-02-15")  ; your SLIME directory
+;; (load (expand-file-name "~/quicklisp/slime-helper.el"))
+;; (setq inferior-lisp-program "sbcl") ; your Lisp system
+;; (require 'slime)
+;; (slime-setup '(slime-repl slime-asdf))
+;; (setq slime-net-coding-system 'utf-8-unix)
 
 
 ;; Setup PATH 
@@ -130,16 +111,23 @@ env")) do
 
 (setq make-backup-files nil)
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(markdown-command "pandoc"))
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (solarized-light)))
+ '(custom-safe-themes (quote ("1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
+ '(markdown-command "pandoc")
+ '(send-mail-function (quote smtpmail-send-it))
+ '(smtpmail-smtp-server "smtp.gmail.com")
+ '(smtpmail-smtp-service 25)
+ '(tool-bar-mode nil))
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :stipple nil :background "#fcf4dc" :foreground "#52676f" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "apple" :family "NanumGothicCoding"))))
  '(mumamo-background-chunk-major ((t nil)))
  '(mumamo-background-chunk-submode1 ((((class color) (min-colors 88) (background light)) nil)))
  '(mumamo-background-chunk-submode2 ((((class color) (min-colors 88) (background light)) nil)))
@@ -286,3 +274,33 @@ and their terminal equivalents.")
 			 (setq indent-tabs-mode nil)))
 
 (add-to-list 'auto-mode-alist '("\\.md" . markdown-mode))
+
+(load "~/.emacs.d/itunes.el")
+(require 'itunes)
+(global-set-key (key "s-i") 'itunes-manip)
+
+
+(setq column-number-mode t)
+
+
+(defun iswitchb-local-keys ()
+  (mapc (lambda (K) 
+	      (let* ((key (car K)) (fun (cdr K)))
+			(define-key iswitchb-mode-map (edmacro-parse-keys key) fun)))
+	    '(("<right>" . iswitchb-next-match)
+	      ("<left>"  . iswitchb-prev-match)
+	      ("<up>"    . ignore             )
+	      ("<down>"  . ignore             ))))
+(add-hook 'iswitchb-define-mode-map-hook 'iswitchb-local-keys)
+
+
+;; Mumamo is making emacs 23.3 freak out:
+(when (and (equal emacs-major-version 23)
+           (equal emacs-minor-version 3))
+  (eval-after-load "bytecomp"
+    '(add-to-list 'byte-compile-not-obsolete-vars
+                  'font-lock-beginning-of-syntax-function))
+  ;; tramp-compat.el clobbers this variable!
+  (eval-after-load "tramp-compat"
+    '(add-to-list 'byte-compile-not-obsolete-vars
+                  'font-lock-beginning-of-syntax-function)))
