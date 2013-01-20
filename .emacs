@@ -1,3 +1,4 @@
+(require 'cl)
 (setq inhibit-splash-screen t)
 (set-language-environment "UTF-8")
 (setq load-path (cons (expand-file-name "~/.emacs.d/") load-path))
@@ -115,13 +116,16 @@ env")) do
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(column-number-mode t)
  '(custom-enabled-themes (quote (solarized-light)))
  '(custom-safe-themes (quote ("1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
  '(markdown-command "pandoc")
+ '(menu-bar-mode nil)
  '(send-mail-function (quote smtpmail-send-it))
  '(smtpmail-smtp-server "smtp.gmail.com")
  '(smtpmail-smtp-service 25)
- '(tool-bar-mode nil))
+ '(tool-bar-mode nil)
+ '(tooltip-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -133,21 +137,6 @@ env")) do
  '(mumamo-background-chunk-submode2 ((((class color) (min-colors 88) (background light)) nil)))
  '(mumamo-background-chunk-submode3 ((((class color) (min-colors 88) (background light)) nil)))
  '(mumamo-background-chunk-submode4 ((((class color) (min-colors 88) (background light)) nil))))
-
-
-;; moz-repl
-(autoload 'moz-minor-mode "moz" "Mozilla Minor and Inferior Mozilla Modes" t)
-
-(add-hook 'js2-mode-hook 'js2-custom-setup)
-(defun js2-custom-setup ()
-  (moz-minor-mode 1))
-
-;; swank-js
-(global-set-key [f5] 'slime-js-reload)
-(add-hook 'js2-mode-hook
-          (lambda ()
-            (slime-js-minor-mode 1)))
-
 
 ;; tumble setting
 
@@ -170,11 +159,11 @@ env")) do
 
 ;; tag navigation shortcut
 
-(fset 'find-next-tag "\C-u\256")        ; macro for C-u M-.
-(fset 'find-prev-tag "\C-u-\256")       ; macro for C-u - M-.
-(global-set-key "\M-]" 'find-next-tag)
-(global-set-key "\M-[" 'find-prev-tag)
-(global-set-key "\M-\," 'pop-tag-mark)
+;;(fset 'find-next-tag "\C-u\256")        ; macro for C-u M-.
+;;(fset 'find-prev-tag "\C-u-\256")       ; macro for C-u - M-.
+;;(global-set-key "\M-]" 'find-next-tag)
+;;(global-set-key "\M-[" 'find-prev-tag)
+;;(global-set-key "\M-\," 'pop-tag-mark)
 
 
 (defun delete-this-buffer-and-file ()
@@ -216,19 +205,30 @@ env")) do
 				  indent-tabs-mode nil)))
 
 
+;; (defvar real-keyboard-keys
+;;   '(("M-<up>"        . "\M-[1;3A")
+;;     ("M-<down>"      . "\M-[1;3B")
+;;     ("M-<right>"     . "\M-[1;3C")
+;;     ("M-<left>"      . "\M-[1;3D")
+;;     ("C-<return>"    . "\C-j")
+;;     ("C-<delete>"    . "\M-[3;5~")
+;;     ("C-<up>"        . "\M-[1;5A")
+;;     ("C-<down>"      . "\M-[1;5B")
+;;     ("C-<right>"     . "\M-[1;5C")
+;;     ("C-<left>"      . "\M-[1;5D"))
+;;   "An assoc list of pretty key strings
+;; and their terminal equivalents.")
+
 (defvar real-keyboard-keys
-  '(("M-<up>"        . "\M-[1;3A")
-    ("M-<down>"      . "\M-[1;3B")
-    ("M-<right>"     . "\M-[1;3C")
-    ("M-<left>"      . "\M-[1;3D")
-    ("C-<return>"    . "\C-j")
-    ("C-<delete>"    . "\M-[3;5~")
-    ("C-<up>"        . "\M-[1;5A")
-    ("C-<down>"      . "\M-[1;5B")
-    ("C-<right>"     . "\M-[1;5C")
-    ("C-<left>"      . "\M-[1;5D"))
-  "An assoc list of pretty key strings
-and their terminal equivalents.")
+  '(("M-<up>"        . "\C-[\C-[OA")
+	("M-<down>"      . "\C-[\C-[OB")
+	("M-<right>"     . "\C-[\C-[OC")
+	("M-<left>"      . "\C-[\C-[OD")
+	("C-<up>"        . "\C-[[A")
+	("C-<down>"      . "\C-[[B")
+	("C-<right>"     . "\C-[[C")
+	("C-<left>"      . "\C-[[D"))
+   "An assoc list of pretty key strings and their terminal equivalents.")
 
 (defun key (desc)
   (or (and window-system (read-kbd-macro desc))
@@ -239,6 +239,11 @@ and their terminal equivalents.")
 (global-set-key (key "M-<right>") 'windmove-right)        ; move to right window
 (global-set-key (key "M-<up>") 'windmove-up)              ; move to upper window
 (global-set-key (key "M-<down>") 'windmove-down)          ; move to downer window
+
+(global-set-key (kbd "C-c <left>")  'windmove-left)
+(global-set-key (kbd "C-c <right>") 'windmove-right)
+(global-set-key (kbd "C-c <up>")    'windmove-up)
+(global-set-key (kbd "C-c <down>")  'windmove-down)
 
 (global-auto-revert-mode t)
 

@@ -57,3 +57,16 @@ export JAVA_HOME
 
 PATH=/Library/PostgreSQL/8.3/bin/:$PATH
 
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+# ssh-agent variables
+if [ -f ~/.ssh-agent.sh ]; then
+    . ~/.ssh-agent.sh
+fi
+if [ ! -S $SSH_AUTH_SOCK ]; then
+    ssh-agent -t 86400 > ~/.ssh-agent.sh
+    echo "No agent! ssh-agent started."
+    . ~/.ssh-agent.sh
+fi
