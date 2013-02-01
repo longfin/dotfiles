@@ -119,6 +119,7 @@ env")) do
  '(column-number-mode t)
  '(custom-enabled-themes (quote (solarized-light)))
  '(custom-safe-themes (quote ("1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
+ '(facebook-session-info (quote ((request_args . [((value . "f2a0dcdc0d9025c3bfcc0db130d5cc32") (key . "sig")) ((value . "497592876921690") (key . "api_key")) ((value . "0263f24ab3a5211d694fa48d83c5f205") (key . "auth_token")) ((value . "20746823191214") (key . "call_id")) ((value . "JSON") (key . "format")) ((value . "auth.getSession") (key . "method")) ((value . "1.0") (key . "v"))]) (error_msg . "Invalid parameter") (error_code . 100))))
  '(markdown-command "pandoc")
  '(menu-bar-mode nil)
  '(send-mail-function (quote smtpmail-send-it))
@@ -309,3 +310,17 @@ env")) do
   (eval-after-load "tramp-compat"
     '(add-to-list 'byte-compile-not-obsolete-vars
                   'font-lock-beginning-of-syntax-function)))
+
+(require 'rcirc)
+(setq rcirc-default-nick "longfin")
+(setq rcirc-default-full-name "longfin")
+(setq rcirc-server-alist
+	  '(("irc.ozinger.org"
+		 :channels ("#lispkorea-dev" "#longfin"))
+		("irc.freenode.net"
+		 :channels ("#ubuntu-ko" "#clojure" "#emacs"))))
+
+(load "~/.emacs.d/rcirc-notify.el")
+(require 'rcirc-notify)
+(rcirc-notify-add-hooks)
+(setq rcirc-notify-check-frame t)

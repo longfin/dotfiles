@@ -27,8 +27,8 @@ export LANG=ko_KR.UTF-8
 PATH=$PATH:~/.cabal/bin
 export PATH
 
-JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF8 -Dswank.encoding=UTF8'
-export JAVA_TOOL_OPTIONS
+#JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF8 -Dswank.encoding=UTF8'
+#export JAVA_TOOL_OPTIONS
 
 PATH=$PATH:/Users/longfin/dev/Racket-5.1.1/bin
 export PATH
@@ -52,8 +52,8 @@ export AWS_RDS_HOME
 PATH=$PATH:$AWS_RDS_HOME/bin/
 export PATH
 
-JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
-export JAVA_HOME
+#JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
+#export JAVA_HOME
 
 PATH=/Library/PostgreSQL/8.3/bin/:$PATH
 
@@ -70,3 +70,7 @@ if [ ! -S $SSH_AUTH_SOCK ]; then
     echo "No agent! ssh-agent started."
     . ~/.ssh-agent.sh
 fi
+
+export PATH="/home/longfin/bin/:$PATH"
+export PATH="/home/longfin/dev/depot_tools/:$PATH"
+export PATH="/home/longfin/dev/adt-bundle-linux-x86_64/sdk/platform-tools:$PATH"
