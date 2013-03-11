@@ -324,3 +324,24 @@ env")) do
 (require 'rcirc-notify)
 (rcirc-notify-add-hooks)
 (setq rcirc-notify-check-frame t)
+(require `tramp)
+
+(load "~/.emacs.d/calfw.el")
+(load "~/.emacs.d/calfw-ical.el")
+(load "~/.emacs.d/calfw-gcal.el")
+(require 'calfw)
+(require 'calfw-ical)
+(require 'calfw-gcal)
+(define-key cfw:calendar-mode-map (kbd "a") 'cfw:gcal-main)
+
+(defun my-open-calendar ()
+  (interactive)
+  (cfw:open-calendar-buffer
+   :contents-sources
+   (list
+    (cfw:ical-create-source "gcal" "https://www.google.com/calendar/ical/longfinfunnel%40gmail.com/private-39eefe9355398578c74f9d2f0d17f531/basic.ics" "IndianRed")
+   ))) 
+(put 'upcase-region 'disabled nil)
+
+(setq initial-scratch-message nil)
+

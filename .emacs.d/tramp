@@ -1,4 +1,4 @@
-;; -*- emacs-lisp -*- <13/01/12 11:49:35 /home/longfin/.emacs.d/tramp>
+;; -*- emacs-lisp -*- <13/02/26 01:09:06 /home/longfin/.emacs.d/tramp>
 ;; Tramp connection history.  Don't change this file.
 ;; You can delete it, forcing Tramp to reapply the checks.
 
@@ -65,7 +65,7 @@
   ("inline-compress" "gzip")
   ("inline-decompress" "gzip -d"))
  (["sudo" "root" "longfin-ThinkPad-Edge-S430" nil]
-  ("uname" "Linux 3.5.0-17-generic")
+  ("uname" "Linux 3.4.0-030400-generic")
   ("test" "test")
   ("remote-path"
    ("/bin" "/usr/bin" "/usr/sbin" "/usr/local/bin"))
@@ -74,13 +74,16 @@
   ("perl-file-spec" t)
   ("perl-cwd-realpath" t)
   ("perl" "\\perl")
+  ("file-exists" "test -e")
   ("readlink" "\\readlink")
   ("stat" "\\stat")
-  ("file-exists" "test -e")
+  ("ls" "/bin/ls --color=never")
   ("id" "/usr/bin/id")
-  ("gid-integer" 0)
   ("uid-integer" 0)
+  ("gid-integer" 0)
   ("local-encoding" base64-encode-region)
   ("local-decoding" base64-decode-region)
   ("remote-encoding" "base64")
-  ("remote-decoding" "base64 -d -i")))
+  ("remote-decoding" "base64 -d -i")
+  ("inline-compress" "gzip")
+  ("inline-decompress" "gzip -d")))

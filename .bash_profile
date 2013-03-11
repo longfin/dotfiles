@@ -46,9 +46,6 @@ export PATH
 CLOJURESCRIPT_HOME=/Users/longfin/dev/clojurescript
 export CLOJURESCRIPT_HOME
 
-AWS_RDS_HOME=/Users/longfin/dev/RDSCli-1.6.001
-export AWS_RDS_HOME
-
 PATH=$PATH:$AWS_RDS_HOME/bin/
 export PATH
 
@@ -57,3 +54,5 @@ export JAVA_HOME
 
 PATH=/Library/PostgreSQL/8.3/bin/:$PATH
 
+AWS_DEFAULT_REGION=us-east-1b
+export AWS_DEFAULT_REGION
