@@ -147,6 +147,7 @@ env")) do
 
 (add-hook 'python-mode-hook '(lambda()
 							   (local-set-key (kbd "RET") 'newline-and-indent)
+							   (local-set-key (kbd "C-x p") 'pep8)
 							   (unless (eq buffer-file-name nil) 
 								 (flymake-mode 1)
 								 (flymake-cursor-mode 1)
@@ -244,6 +245,11 @@ env")) do
 (global-set-key (key "M-<right>") 'windmove-right)        ; move to right window
 (global-set-key (key "M-<up>") 'windmove-up)              ; move to upper window
 (global-set-key (key "M-<down>") 'windmove-down)          ; move to downer window
+
+(global-set-key (key "s-j") 'windmove-left)          ; move to left windnow
+(global-set-key (key "s-k") 'windmove-up)              ; move to upper window
+(global-set-key (key "s-l") 'windmove-down)          ; move to downer window
+(global-set-key (key "s-;") 'windmove-right)        ; move to right window
 
 (global-set-key (kbd "C-c <left>")  'windmove-left)
 (global-set-key (kbd "C-c <right>") 'windmove-right)
@@ -349,3 +355,7 @@ env")) do
 
 (setq initial-scratch-message nil)
 
+(global-set-key (kbd "M-j") 'backward-char) 
+(global-set-key (kbd "M-k") 'previous-line)
+(global-set-key (kbd "M-l") 'next-line)
+(global-set-key (kbd "M-;") 'forward-char)
