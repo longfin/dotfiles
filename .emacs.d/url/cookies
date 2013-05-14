@@ -5,8 +5,8 @@
  '((".google.com"
   [url-cookie "PREF" "ID=6db5c2c56c9b66dd:TM=1360130152:LM=1360130152:S=48MS-OYd3kLFKZ2d" "06-Feb-2015 05:55:52.00 GMT" "/" ".google.com" nil])
  ("marmalade-repo.org"
-  [url-cookie "httpOnly" nil "Wed, 10 Apr 2013 12:16:00 GMT" "/" "marmalade-repo.org" nil]
-  [url-cookie "connect.sid" "pvimLviCn17Bb4uIXMXK65mY.EQUi1lzSM7CPDDWRdGKTvt3xJAtaWxxemQdx3nKNJXU" "Wed, 10 Apr 2013 12:16:00 GMT" "/" "marmalade-repo.org" nil]))
+  [url-cookie "httpOnly" nil "Sun, 12 May 2013 13:20:00 GMT" "/" "marmalade-repo.org" nil]
+  [url-cookie "connect.sid" "5kqLpNDhWoYd61UrRA3AwwSy.KZw3aIA1fDTSbP7voki%2FGigYsID4qVus912MOQ0DFHU" "Sun, 12 May 2013 13:20:00 GMT" "/" "marmalade-repo.org" nil]))
 )
 (setq url-cookie-secure-storage
  'nil)

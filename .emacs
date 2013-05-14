@@ -143,17 +143,6 @@ env")) do
 
 (require 'tumble)
 
-;; python mode tweek
-
-(add-hook 'python-mode-hook '(lambda()
-							   (local-set-key (kbd "RET") 'newline-and-indent)
-							   (local-set-key (kbd "C-x p") 'pep8)
-							   (unless (eq buffer-file-name nil) 
-								 (flymake-mode 1)
-								 (flymake-cursor-mode 1)
-								 (flymake-python-pyflakes-load 1))))
-
-
 ;; add port option to sql-mysql
 (defadvice sql-mysql (around with-port activate)
   (let* ((port (read-string "Port: "))
