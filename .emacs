@@ -12,21 +12,6 @@
 (load "~/.emacs.d/hangul.el")
 (require 'hangul)
 
-(add-to-list 'load-path "~/.emacs.d/nxhtml")
-(load "~/.emacs.d/nxhtml/autostart.el")
-
-(add-hook 'nxml-mode-hook 
-          '(lambda()
-             (setq c-basic-offset 2)
-             (setq tab-width 2)
-             (setq indent-tabs-mode nil)
-             (setq nxml-child-indent 2)
-             (setq nxml-slash-auto-complete-flag t)
-             (message "customize nxml-mode")))
-
-(add-to-list 'auto-mode-alist '("\\.htm\\'" . nxhtml-mumamo-mode))
-(add-to-list 'auto-mode-alist '("\\.html\\'" . nxhtml-mumamo-mode))
-
 (when (locate-library "erc")
   (require 'erc)
   (setq erc-server "purple.hanirc.org:6666")
@@ -249,13 +234,6 @@ env")) do
 
 (setq virtualenv-root ".")
 
-(setq
- nxhtml-global-minor-mode t
- nxhtml-skip-welcome t
- indent-region-mode t
- rng-nxml-auto-validate-flag nil
- nxml-degraded t)
-
 ;; jinja mode
 (load "~/.emacs.d/jinja.el")
 
@@ -348,3 +326,15 @@ env")) do
 (global-set-key (kbd "M-k") 'previous-line)
 (global-set-key (kbd "M-l") 'next-line)
 (global-set-key (kbd "M-;") 'forward-char)
+
+(add-hook 'python-mode-hook
+          '(lambda()
+			 (local-set-key (kbd "C-x p") 'pep8)))
+
+(load "~/.emacs.d/multi-web-mode-0.2.1/load.el")
+(require 'multi-web-mode)
+(setq mweb-default-major-mode 'sgml-mode)
+(setq mweb-tags '((js-mode "<script +\\(type=\"text/javascript\"\\|language=\"javascript\"\\)[^>]*>" "</script>")
+				  (css-mode "<style +type=\"text/css\"[^>]*>" "</style>")))
+(setq mweb-filename-extensions '("html" "htm" "template"))
+(multi-web-global-mode 1)
